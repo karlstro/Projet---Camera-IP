@@ -1,0 +1,178 @@
+!
+hostname SW_GRP7
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1227327360
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1227327360
+ revocation-check none
+ rsakeypair TP-self-signed-1227327360
+!
+!
+crypto pki certificate chain TP-self-signed-1227327360
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 31323237 33323733 3630301E 170D3933 30333031 30303030
+  35355A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 32323733
+  32373336 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100B5E0 FB77AAB3 A67C82AA 972AB8B3 02DF9DDF 76319915 E32FB554 060F04D8
+  16999351 1B2189B0 C6E0A825 01FA584C 72B9465D A76DDA20 F95E5900 2D39045F
+  3673BB72 705E4958 1DDB28DD 7260B66A 6D1E93AD AECE3D8C 8FC4671E 59C1E259
+  DFF502F7 FF494F88 046B046A 687D64E3 558C7E66 AC5E8EA3 456C8E74 D5B3DF6D
+  02090203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 149F7E5E 2A09F063 62FA2A9A BA203422 5A6B2C18 98301D06
+  03551D0E 04160414 9F7E5E2A 09F06362 FA2A9ABA 2034225A 6B2C1898 300D0609
+  2A864886 F70D0101 05050003 818100AC 543512C6 46E2D0E4 40DA5B50 8EEFBC68
+  9113D475 695E5314 80D44CA4 F52CFC05 87EA845D D5511DA3 19B171F2 A7091A48
+  95C51329 8B57C82A 52752105 DEBECE2A 6AA8572B 040518AB 13B10014 F4B4A1C4
+  3FA52C88 6ECEABA0 CC487069 FD69389C 990731A5 48D12132 0801F9FB 699F0AAB
+  97553A99 DA24B283 6897708A 669909
+        quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/2
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/3
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/4
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/5
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/6
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/7
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/8
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/9
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/10
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/11
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/12
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/13
+ switchport access vlan 104
+ switchport mode access
+!
+interface FastEthernet0/14
+ switchport access vlan 104
+ switchport mode access
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+ switchport access vlan 102
+!
+interface FastEthernet0/24
+ switchport access vlan 102
+ switchport mode access
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 103
+ switchport trunk allowed vlan 1,100-104
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan100
+ description GRP7_LAN
+ ip address 192.168.100.253 255.255.255.0
+!
+interface Vlan101
+ description GRP7_WIFI
+ ip address 192.168.101.253 255.255.255.0
+!
+interface Vlan102
+ description GRP7_SRV
+ ip address 192.168.102.253 255.255.255.0
+!
+interface Vlan103
+ description GRP7_MGMT
+ ip address 192.168.103.253 255.255.255.0
+!
+interface Vlan104
+ description GRP7_VIDEO
+ ip address 192.168.104.253 255.255.255.0
+!
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+end

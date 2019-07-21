@@ -1,0 +1,157 @@
+!
+hostname RT_GRP7
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+
+ip dhcp excluded-address 192.168.100.250 192.168.100.254
+ip dhcp excluded-address 192.168.100.1 192.168.100.10
+!
+ip dhcp pool GRP7_LAN
+ network 192.168.100.0 255.255.255.0
+ dns-server 8.8.8.8
+ default-router 192.168.100.254
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid ISR4321/K9 sn FDO22470E6E
+!
+spanning-tree extend system-id
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.100.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.101
+ encapsulation dot1Q 101
+ ip address 192.168.101.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.102
+ encapsulation dot1Q 102
+ ip address 192.168.102.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.103
+ encapsulation dot1Q 103 native
+ ip address 192.168.103.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.104
+ encapsulation dot1Q 104
+ ip address 192.168.104.254 255.255.255.0
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ negotiation auto
+!
+interface Serial0/2/0
+ no ip address
+ shutdown
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+ip tftp source-interface GigabitEthernet0
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+end
